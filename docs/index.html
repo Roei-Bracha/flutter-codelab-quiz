@@ -77,7 +77,95 @@ $ flutter config --enable-web
         <ol type="1">
 <li>Open Visual Studio Code and press <code>Ctrl + Shift + p</code> and type <code>Flutter: New Application Project.</code><br>and choose where do you want to create your app.</li>
 <li>Now we have the sample project<br>try to run the app with the little play icon in your visual studio code (at the top right corner).<br><img alt="enter image description here" src="img/befab99eb085d24c.jpg"></li>
+<li>Delete all the code from the  <code>main.dart</code> file and replace it with the following code:<pre><code>import &#39;package:flutter/material.dart&#39;;
+
+
+void main() {
+runApp(MyApp());
+}
+
+
+class MyApp extends StatelessWidget {
+// This widget is the root of your application.
+@override
+Widget build(BuildContext context) {
+    return MaterialApp(
+    title: &#39;Flutter Demo&#39;,
+    theme: ThemeData(
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+    ),
+    home: MyHomePage(),
+    );
+}
+}
+
+
+class MyHomePage extends StatelessWidget {
+const MyHomePage({Key key}) : super(key: key);
+
+
+@override
+Widget build(BuildContext context) {
+    return Scaffold(
+    appBar: AppBar(
+        title: Text(&#34;My app&#34;),
+    ),
+    body: Container(
+        child: Center(
+        child: Text(&#34;Hello world&#34;),
+        ),
+    ),
+    );
+    }
+}
+</code></pre>
+<img alt="enter image description here" src="img/842b854a8b0eabbe.jpg"><h2 is-upgraded>So what do we have here:</h2>
+<pre><code>void main() {
+runApp(MyApp());
+}
+</code></pre>
+</li>
 </ol>
+<p>this part at the begining is where we tell flutter to run Our app:</p>
+<pre><code>   class MyApp extends StatelessWidget {
+    @override
+    Widget build(BuildContext context) {
+        return MaterialApp(
+        title: &#39;Flutter Demo&#39;,
+        theme: ThemeData(
+            primarySwatch: Colors.blue,
+            visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+        home: MyHomePage(),
+        );
+    }
+    }
+</code></pre>
+<p>the app like any other thing in Flutter is a stetless Widget where we return a <a href="https://api.flutter.dev/flutter/material/MaterialApp-class.html" target="_blank">MaterialApp</a> Widget<br>MaterialApp - is A widget that contains an application that uses material design.</p>
+<p>in this Widget we define the app theme and set what is our home screen - in this case the <code>MyHomePage</code> widget:</p>
+<pre><code>class MyHomePage extends StatelessWidget {
+  const MyHomePage({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(&#34;My app&#34;),
+      ),
+      body: Container(
+        child: Center(
+          child: Text(&#34;Hello world&#34;),
+        ),
+      ),
+    );
+  }
+}
+</code></pre>
+<p>In this widget we are building our first Screen.<br>To make it easier we use <a href="https://api.flutter.dev/flutter/material/Scaffold-class.html" target="_blank">Scaffold</a> a widget that implements the basic material design visual layout structure.</p>
+<p>we crate an app bar and set a title with the Text &#34;My app&#34;<br>under body we will add our app page - in this case a <a href="https://api.flutter.dev/flutter/widgets/Container-class.html" target="_blank">Container</a> with the text hello world centred in the center of the screen</p>
+<h2 is-upgraded>Extra :</h2>
+<iframe class="youtube-video" src="https://www.youtube.com/embed/c1xLMaTUWCY?rel=0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
       </google-codelab-step>
