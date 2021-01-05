@@ -187,7 +187,7 @@ we crate an app bar and set a title with the Text "My app"
 under body we will add our app page - in this case a [Container](https://api.flutter.dev/flutter/widgets/Container-class.html) with the text hello world centred in the center of the screen
 
 ### Extra :
-[container](https://youtu.be/c1xLMaTUWCY) - video about containers 
+![https://www.youtube.com/watch?v=c1xLMaTUWCY&ab_channel=Flutter](https://www.youtube.com/watch?v=c1xLMaTUWCY&ab_channel=Flutter)
 
 
 <!-- ------------------------ -->
