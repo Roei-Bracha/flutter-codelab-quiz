@@ -1,0 +1,25 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2021-01-05T13:45:25Z",
+  "id": "docs",
+  "duration": 50,
+  "title": "Write your First flutter app",
+  "authors": "Roei Bracha",
+  "summary": "Write your First flutter app",
+  "source": "my-codelab.md",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "flutter"
+  ],
+  "tags": [
+    "beginner"
+  ],
+  "feedback": "https://petetot.netlify.com",
+  "url": "docs"
+}
