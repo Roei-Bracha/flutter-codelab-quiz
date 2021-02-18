@@ -790,10 +790,17 @@ So every thing is almost done - now we only have to insert the Game Logic
 * generate new Question every Time
 * Count the points
 
-### Generate new Questions
+## Generate new Questions
 Duration: 10
 
-First of all we would like to change the `Question.dart` widget to get the question from the main screen.
+to generate the questions we will use this Trivia api:
+[Trivia api](https://opentdb.com/api_config.php).
+
+### Move the questions to the main screen:
+
+First of all we would like to move the questions to the main screen and pass them to the the Question widget
+
+change the `Question.dart` widget to get the question from the main screen:
 
 ```dart
 class Question extends StatelessWidget {
@@ -813,3 +820,106 @@ class Question extends StatelessWidget {
   ...
   ...
 ```
+
+And in the main screen we will pass the question:
+```dart
+Widget build(BuildContext context) {
+    final question_text = "What does CPU stand for?";
+    final correct_answer = "Central Processing Unit";
+    final incorrect_answers = [
+      "Central Process Unit",
+      "Computer Personal Unit",
+      "Central Processor Unit"
+    ];
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("My app"),
+      ),
+      body: Container(
+        child: Question(
+          correct_answer: correct_answer,
+          incorrect_answers: incorrect_answers,
+          question_text: question_text,
+        ),
+      ),
+    );
+  }
+```
+
+To make the game dynamic and challenging we would like to change the question every time and hold dynamic data on the game in the main screen
+for that we need to change the `MainScreen` widget to be a StatefulWidget widget.
+
+go to the `MainScreen.dart` file click on the class name and you will see the little bulb in your VScode 💡 and choose convert to StatefulWidget
+(if you dont see it you can press `Ctrl + .`)
+
+in the main screen we would like to store the following data:
+* questions - a list of the questions.
+* index - the question number.
+* points - how many points got.
+
+so we will add it to the MainScreen Widget:
+```dart
+class _MainScreenState extends State<MainScreen> {
+  int index = 0;
+  List questions = [];
+  int points = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      ....
+
+```
+At the begining we dont have questions yet so we would like to shoLoading animation
+crate a loading Widget:
+`Loading.dart`:
+```dart
+import 'package:flutter/material.dart';
+
+class Loading extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+        child: Container(
+            height: 100,
+            width: 100,
+            child: CircularProgressIndicator(
+              strokeWidth: 10,
+            )));
+  }
+}
+```
+and now we will tell the Main screen to show the loading indicator if the Question list length is 0
+
+```dart
+class _MainScreenState extends State<MainScreen> {
+  int index = 0;
+  List questions = [];
+  int points = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("My app"),
+      ),
+      body: Container(
+        child: questions.length== 0 ? Loading(): Container(),
+      ),
+    );
+  }
+}
+```
+
+### Add http package
+to create an http request we will have to add the http package to our project:
+1. go to [Pub dev](https://pub.dev) and search for the `http` package ([the package](https://pub.dev/packages/http)).
+2. follow the instructions in the installing tab:
+   1. add the package to the dependencies in the `pubspec.yaml` file.
+   2. if you use VScode it will automaticly install it when you will press enter
+   but if it dosen't: `flutter pub get`
+3. In the Example Tab you can see how to use the package.
+
+
+
+

@@ -673,12 +673,127 @@ class AnswerButton extends StatelessWidget {
 
       </google-codelab-step>
     
-      <google-codelab-step label="Game Logic" duration="15">
+      <google-codelab-step label="Game Logic" duration="0">
         <p>So every thing is almost done - now we only have to insert the Game Logic</p>
 <ul>
 <li>generate new Question every Time</li>
 <li>Count the points</li>
 </ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Generate new Questions" duration="10">
+        <p>to generate the questions we will use this Trivia api:<br><a href="https://opentdb.com/api_config.php" target="_blank">Trivia api</a>.</p>
+<h2 is-upgraded>Move the questions to the main screen:</h2>
+<p>First of all we would like to move the questions to the main screen and pass them to the the Question widget</p>
+<p>change the <code>Question.dart</code> widget to get the question from the main screen:</p>
+<pre><code>class Question extends StatelessWidget {
+  String question_text;
+  String correct_answer;
+  List&lt;String&gt; incorrect_answers;
+
+  Question(
+      {@required this.question_text,
+      @required this.correct_answer,
+      @required this.incorrect_answers,
+      Key key})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+  ...
+  ...
+</code></pre>
+<p>And in the main screen we will pass the question:</p>
+<pre><code>Widget build(BuildContext context) {
+    final question_text = &#34;What does CPU stand for?&#34;;
+    final correct_answer = &#34;Central Processing Unit&#34;;
+    final incorrect_answers = [
+      &#34;Central Process Unit&#34;,
+      &#34;Computer Personal Unit&#34;,
+      &#34;Central Processor Unit&#34;
+    ];
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(&#34;My app&#34;),
+      ),
+      body: Container(
+        child: Question(
+          correct_answer: correct_answer,
+          incorrect_answers: incorrect_answers,
+          question_text: question_text,
+        ),
+      ),
+    );
+  }
+</code></pre>
+<p>To make the game dynamic and challenging we would like to change the question every time and hold dynamic data on the game in the main screen<br>for that we need to change the <code>MainScreen</code> widget to be a StatefulWidget widget.</p>
+<p>go to the <code>MainScreen.dart</code> file click on the class name and you will see the little bulb in your VScode 💡 and choose convert to StatefulWidget<br>(if you dont see it you can press <code>Ctrl + .</code>)</p>
+<p>in the main screen we would like to store the following data:</p>
+<ul>
+<li>questions - a list of the questions.</li>
+<li>index - the question number.</li>
+<li>points - how many points got.</li>
+</ul>
+<p>so we will add it to the MainScreen Widget:</p>
+<pre><code>class _MainScreenState extends State&lt;MainScreen&gt; {
+  int index = 0;
+  List questions = [];
+  int points = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      ....
+
+</code></pre>
+<p>At the begining we dont have questions yet so we would like to shoLoading animation<br>crate a loading Widget:<br><code>Loading.dart</code>:</p>
+<pre><code>import &#39;package:flutter/material.dart&#39;;
+
+class Loading extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+        child: Container(
+            height: 100,
+            width: 100,
+            child: CircularProgressIndicator(
+              strokeWidth: 10,
+            )));
+  }
+}
+</code></pre>
+<p>and now we will tell the Main screen to show the loading indicator if the Question list length is 0</p>
+<pre><code>class _MainScreenState extends State&lt;MainScreen&gt; {
+  int index = 0;
+  List questions = [];
+  int points = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(&#34;My app&#34;),
+      ),
+      body: Container(
+        child: questions.length== 0 ? Loading(): Container(),
+      ),
+    );
+  }
+}
+</code></pre>
+<h2 is-upgraded>Add http package</h2>
+<p>to create an http request we will have to add the http package to our project:</p>
+<ol type="1">
+<li>go to <a href="https://pub.dev" target="_blank">Pub dev</a> and search for the <code>http</code> package (<a href="https://pub.dev/packages/http" target="_blank">the package</a>).</li>
+<li>follow the instructions in the installing tab:<br><br><ol type="1">
+<li>add the package to the dependencies in the <code>pubspec.yaml</code> file.</li>
+<li>if you use VScode it will automaticly install it when you will press enter<br>but if it dosen&#39;t: <code>flutter pub get</code></li>
+</ol>
+</li>
+<li>In the Example Tab you can see how to use the package.</li>
+</ol>
 
 
       </google-codelab-step>

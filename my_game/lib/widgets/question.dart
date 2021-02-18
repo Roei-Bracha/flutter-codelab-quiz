@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:my_game/widgets/AnswerButton.dart';
 
 class Question extends StatelessWidget {
-  final question_text = "What does CPU stand for?";
-  final correct_answer = "Central Processing Unit";
-  final incorrect_answers = [
-    "Central Process Unit",
-    "Computer Personal Unit",
-    "Central Processor Unit"
-  ];
+  String question_text;
+  String correct_answer;
+  List<String> incorrect_answers;
 
-  Question({Key key}) : super(key: key);
+  Question(
+  {@required this.question_text,
+  @required this.correct_answer,
+  @required this.incorrect_answers,
+  Key key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
