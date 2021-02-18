@@ -13,7 +13,7 @@ docker pull bpetetot/claat
 ## Usage
 
 ```sh
-docker container run -it -v $(pwd):/app bpetetot/claat -h
+docker container run -it -v $(pwd):/app bpetetot/claat export my-codelab.md
 ```
 
 When you are working on the codelab, you can serve it on localhost:

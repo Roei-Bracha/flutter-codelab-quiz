@@ -170,6 +170,519 @@ runApp(MyApp());
 
       </google-codelab-step>
     
+      <google-codelab-step label="Order our directory" duration="5">
+        <p>To make sure our app stay organize crate two folders under the <code>lib</code> folder:</p>
+<ul>
+<li>widget</li>
+<li>screens</li>
+</ul>
+<p>now we will create a new File in The screens folder and call it <code>MainScreen.dart</code></p>
+<p>in this file start writing <code>statelessW</code> and use the suggested snippet to create an Empty Widget</p>
+<pre><code>class name extends StatelessWidget {
+  const name({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: child,
+    );
+  }
+}
+</code></pre>
+<p>change the name to <code>MainScreen</code> and when you in the first line press <code>Ctrl + .</code> or the little bulb 💡 and choose <code>import library &#39;package:flutter/material.dart&#39;</code><br>cut your widget from the <code>main.dart</code> file and paste in this file:</p>
+<pre><code>import &#39;package:flutter/material.dart&#39;;
+
+class MainScreen extends StatelessWidget {
+  const MainScreen({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(&#34;My app&#34;),
+      ),
+      body: Container(
+        child: Center(
+          child: Text(&#34;Hello world&#34;),
+        ),
+      ),
+    );
+  }
+}
+</code></pre>
+<p>now we will go to the <code>main.dart</code> file and delete the <code>MyHomePage</code> Widget<br>and replace home widget with the MainScreen like that:<br>(VScode should auto import the mainScreen file for you)</p>
+<pre><code>import &#39;package:flutter/material.dart&#39;;
+import &#39;package:my_game/screens/MainScreen.dart&#39;;
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: &#39;Flutter Demo&#39;,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
+      home: MainScreen(),
+    );
+  }
+}
+
+</code></pre>
+<p>your directory in the end Should look like that:<br><img alt="enter image description here" src="img/8f6f839ee259d686.jpg"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Screen Arrangement" duration="10">
+        <p>in this Section we will create the Question Widget and in the end it will look look that:<br><img alt="enter image description here" src="img/8f6f839ee259d686.jpg"></p>
+<h2 is-upgraded>plan before you write</h2>
+<p>As you can see we have three big elemnts in a column:</p>
+<ul>
+<li>The Question</li>
+<li>Options</li>
+</ul>
+<p>in the Options we have a Grid of four buttons - with a centered text</p>
+<h2 is-upgraded>Create the Question Widget:</h2>
+<p>create a new widget in the Widgets folder and cal it <code>question.dart</code><br>and make it return a Column</p>
+<pre><code>import &#39;package:flutter/material.dart&#39;;
+
+class Question extends StatelessWidget {
+  const Question({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [],
+    );
+  }
+}
+</code></pre>
+<p>to make sure we will see what we are doing add the widget to our screen <code>MainScreen.dart</code>:</p>
+<pre><code>import &#39;package:flutter/material.dart&#39;;
+import &#39;package:my_game/widgets/question.dart&#39;;
+
+class MainScreen extends StatelessWidget {
+  const MainScreen({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(&#34;My app&#34;),
+      ),
+      body: Container(
+        child: Question(),
+      ),
+    );
+  }
+}
+</code></pre>
+<p>lets store the Question, the Image Url and the answers in the widgets as properties<br>and remove the delete the const in fronnt of the Question constructor</p>
+<p>this Widget will be a little different every time - we add the const only if the widget have a strict state in compilation time</p>
+<p><code>question.dart</code>:</p>
+<pre><code>import &#39;package:flutter/material.dart&#39;;
+
+class Question extends StatelessWidget {
+  final question_text = &#34;What does CPU stand for?&#34;;
+  final correct_answer = &#34;Central Processing Unit&#34;;
+  final incorrect_answers = [
+    &#34;Central Process Unit&#34;,
+    &#34;Computer Personal Unit&#34;,
+    &#34;Central Processor Unit&#34;
+  ];
+
+  Question({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [],
+    );
+  }
+}
+
+</code></pre>
+<p>now we will add the question Text and an empty Container that in the feautre will contain the results<br>we would like to make them withe equal space from the top so we will add to the column: <code>mainAxisAlignment: MainAxisAlignment.spaceAround,</code><br>and top make them in the center of the page we will add <code>crossAxisAlignment: CrossAxisAlignment.center</code></p>
+<pre><code>import &#39;package:flutter/material.dart&#39;;
+
+class Question extends StatelessWidget {
+  final question_text = &#34;What does CPU stand for?&#34;;
+  final correct_answer = &#34;Central Processing Unit&#34;;
+  final incorrect_answers = [
+    &#34;Central Process Unit&#34;,
+    &#34;Computer Personal Unit&#34;,
+    &#34;Central Processor Unit&#34;
+  ];
+
+  Question({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Text(this.question_text),
+        Container(
+          color: Colors.green,
+          height: 100,
+          width: 100,
+        )
+      ],
+    );
+  }
+}
+</code></pre>
+<p>It will look like that:<br><img alt="stage 1" src="img/c80141048e4eeff0.jpg"></p>
+<p>so we have the main axies look good but why its not centered?</p>
+<p>the reason is that it is centered in the middle of the column but the column dosent take the all width of the screen<br>to fix that we will wrap the column with Container and give this container <code>width:double.infinity</code> so the container will be in the width of the all screen.<br>💡 tip - you can press the bulb or <code>Ctrl + .</code> when you on the column and choose wrap with container.</p>
+<p class="image-container"><img alt="stage 1" src="img/584b259f371e3263.jpg"></p>
+<pre><code>import &#39;package:flutter/material.dart&#39;;
+
+class Question extends StatelessWidget {
+  final question_text = &#34;What does CPU stand for?&#34;;
+  final correct_answer = &#34;Central Processing Unit&#34;;
+  final incorrect_answers = [
+    &#34;Central Process Unit&#34;,
+    &#34;Computer Personal Unit&#34;,
+    &#34;Central Processor Unit&#34;
+  ];
+
+  Question({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(this.question_text),
+          Container(
+            color: Colors.green,
+            height: 100,
+            width: 100,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+</code></pre>
+<p>Below that we will want to add the grid of answers so we will add the <code>GridView</code> Widget inside a container and create a grid of 2x2:</p>
+<pre><code>import &#39;package:flutter/material.dart&#39;;
+
+class Question extends StatelessWidget {
+  final question_text = &#34;What does CPU stand for?&#34;;
+  final correct_answer = &#34;Central Processing Unit&#34;;
+  final incorrect_answers = [
+    &#34;Central Process Unit&#34;,
+    &#34;Computer Personal Unit&#34;,
+    &#34;Central Processor Unit&#34;
+  ];
+
+  Question({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        physics: NeverScrollableScrollPhysics(),
+        children: [
+          Text(this.question_text),
+          Container(
+            color: Colors.green,
+            height: 100,
+            width: 100,
+          ),
+          Container(
+            height: 350,
+            child: GridView.count(
+                crossAxisCount: 2,
+                primary: false,
+                padding: const EdgeInsets.all(20),
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                children: &lt;Widget&gt;[
+                  Container(
+                  color: Colors.green,
+                ),Container(
+                  color: Colors.green,
+                ),
+                  Container(
+                    color: Colors.green,
+                  ),
+                  Container(
+                    color: Colors.green,
+                  ),]
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+</code></pre>
+<p>So it will look like that:</p>
+<p class="image-container"><img alt="stage 1" src="img/25b8133a81362552.jpg"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Adding images" duration="5">
+        <p>now let say we want to replace the green square in the middle with an image.<br>first of all we will have to add the picture to the assets folder.<br>download the picture and save it in <code>assets/images/milli.png</code></p>
+<p class="image-container"><img alt="milli-logo" src="img/d700b702c857405d.png"></p>
+<p>now go to your <code>pubspec.yaml</code> and you will see the following comment:</p>
+<pre><code>  # To add assets to your application, add an assets section, like this:
+  # assets:
+  #   - images/a_dot_burr.jpeg
+  #   - images/a_dot_ham.jpeg
+</code></pre>
+<p>uncomment the assets and add the path to the picture:</p>
+<pre><code>  assets:
+   - assets/images/milli.png
+</code></pre>
+<p>now in the code we will insert the image inside our Container:</p>
+<pre><code>  Container(
+    height: 100,
+    width: 100,
+    child: Image.asset(&#39;assets/images/milli.png&#39;),
+  ),
+</code></pre>
+<p>the image asset will automaticly take the size of the container that contains the widget</p>
+<aside class="special"><p>You can use multiple types of Images like <code>Image.network</code> to load an image from the web.</p>
+</aside>
+<p>your app should look like that right now:<br><img alt="stage 2" src="img/a81ee30e998dcc47.jpg"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Answer Widget" duration="10">
+        <p>Create a new Widget: <code>AnswerButton.dart</code><br>this widget will be our Answer button.</p>
+<p>This Widget will get a String that will represent the answer and a function to use on press.<br><code>AnswerButton.dart</code></p>
+<pre><code>import &#39;package:flutter/material.dart&#39;;
+
+class AnswerButton extends StatelessWidget {
+  final String text;
+  final Function onPress;
+
+  AnswerButton({this.text, this.onPress, Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return RaisedButton(
+      color: Theme.of(context).accentColor,
+      child: Text(
+        text,
+        textAlign: TextAlign.center,
+        style: TextStyle(fontSize: 16),
+      ),
+      onPressed: this.onPress,
+    );
+  }
+}
+</code></pre>
+<p>As you can see In this Widget we get two arguments - the text and the function, so we need to add them in the class properties and add them to the Constructor.</p>
+<aside class="special"><p>Instead of creating the same <code>RaisedButton</code> for times and add the style for every one of them, we crate our own Widget and style it only once.</p>
+</aside>
+<p>In this widget I set the RaisedButton color to be taken from the app Theme.<br>you can try to change the colors of the app theme in the <code>main.dart</code> file and see how the all app colors are changing.<br><code>main.dart</code></p>
+<pre><code>class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: &#39;Flutter Demo&#39;,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        accentColor: Colors.amber,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
+      home: MainScreen(),
+    );
+  }
+}
+</code></pre>
+<p>Now we will replace one of the container in the Question Widget with our new Answer Button:</p>
+<pre><code>GridView.count(
+                crossAxisCount: 2,
+                physics: NeverScrollableScrollPhysics(),
+                primary: false,
+                padding: const EdgeInsets.all(20),
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                children: &lt;Widget&gt;[
+                  AnswerButton(text: &#34;Answer&#34;,onPress: (){},),
+                Container(
+                  color: Colors.green,
+                ),
+                  Container(
+                    color: Colors.green,
+                  ),
+                  Container(
+                    color: Colors.green,
+                  ),]
+            ),
+</code></pre>
+<h2 is-upgraded>Generate answers:</h2>
+<p>now we would like to generate the answers from the array of answers we have.<br>so we will add this logic to the build function before the return</p>
+<p>to do so we will crate a List of Widgets that will contain our answers widgets:</p>
+<pre><code>List&lt;Widget&gt; answers = [];
+    answers.add(AnswerButton(
+      text: correct_answer,
+      onPress: () {
+        print(true);
+      },
+    ));
+    incorrect_answers.forEach((ansString) {
+      answers.add(AnswerButton(
+        text: ansString,
+        onPress: () {
+          print(false);
+        },
+      ));
+    });
+</code></pre>
+<p>in this case the current answer will always be the first one so we will shuffle the List with <code>answers.shuffle();</code></p>
+<pre><code>List&lt;Widget&gt; answers = [];
+    answers.add(AnswerButton(
+      text: correct_answer,
+      onPress: () {
+        print(true);
+      },
+    ));
+    incorrect_answers.forEach((ansString) {
+      answers.add(AnswerButton(
+        text: ansString,
+        onPress: () {
+          print(false);
+        },
+      ));
+    });
+    answers.shuffle();
+</code></pre>
+<p>now when we have the array of widget we can add it inside the the GridView children List:</p>
+<pre><code>GridView.count(
+                crossAxisCount: 2,
+                physics: NeverScrollableScrollPhysics(),
+                primary: false,
+                padding: const EdgeInsets.all(20),
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                children: &lt;Widget&gt;[...answers]),
+          )
+</code></pre>
+<p>your app should look like that right now:<br><img alt="stage 3" src="img/9b2df2a100c6064f.jpg"></p>
+<p><code>Question.dart</code>:</p>
+<pre><code>import &#39;package:flutter/material.dart&#39;;
+import &#39;package:my_game/widgets/AnswerButton.dart&#39;;
+
+class Question extends StatelessWidget {
+  final question_text = &#34;What does CPU stand for?&#34;;
+  final correct_answer = &#34;Central Processing Unit&#34;;
+  final incorrect_answers = [
+    &#34;Central Process Unit&#34;,
+    &#34;Computer Personal Unit&#34;,
+    &#34;Central Processor Unit&#34;
+  ];
+
+  Question({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    List&lt;Widget&gt; answers = [];
+    answers.add(AnswerButton(
+      text: correct_answer,
+      onPress: () {
+        print(true);
+      },
+    ));
+    incorrect_answers.forEach((ansString) {
+      answers.add(AnswerButton(
+        text: ansString,
+        onPress: () {
+          print(false);
+        },
+      ));
+    });
+    answers.shuffle();
+    return Container(
+      width: double.infinity,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(this.question_text),
+          Container(
+            height: 100,
+            width: 100,
+            child: Image.asset(&#39;assets/images/milli.png&#39;),
+          ),
+          Container(
+            height: 350,
+            child: GridView.count(
+                crossAxisCount: 2,
+                physics: NeverScrollableScrollPhysics(),
+                primary: false,
+                padding: const EdgeInsets.all(20),
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                children: &lt;Widget&gt;[...answers]),
+          )
+        ],
+      ),
+    );
+  }
+}
+</code></pre>
+<p><code>AnswerButton.dart</code>:</p>
+<pre><code>import &#39;package:flutter/material.dart&#39;;
+
+class AnswerButton extends StatelessWidget {
+  final String text;
+  final Function onPress;
+
+  AnswerButton({this.text, this.onPress, Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return RaisedButton(
+      color: Theme.of(context).accentColor,
+      child: Text(
+        text,
+        textAlign: TextAlign.center,
+        style: TextStyle(fontSize: 16),
+      ),
+      onPressed: this.onPress,
+    );
+  }
+}
+
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Game Logic" duration="15">
+        <p>So every thing is almost done - now we only have to insert the Game Logic</p>
+<ul>
+<li>generate new Question every Time</li>
+<li>Count the points</li>
+</ul>
+
+
+      </google-codelab-step>
+    
   </google-codelab>
 
   <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
